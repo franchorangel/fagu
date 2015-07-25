@@ -8,16 +8,14 @@ class Facturas_model extends CI_Model {
 
     public function registrar_factura()
     {
-      $this->load->helper('url');
-
       $slug = url_title($this->input->post('numero'), 'dash', TRUE);
 
       $data = array(
-        'facturas_numero' => $this->input->post('numero'),
-        'facturas_fecha' => $this->input->post('fecha'),
-        'facturas_establecimiento' => $this->input->post('establecimiento'),
-        'facturas_slug' => $slug,
-        'facturas_foto' => $this->input->post('foto')
+        'numero' => $this->input->post('numero'),
+        'fecha' => $this->input->post('fecha'),
+        'establecimiento' => $this->input->post('establecimiento'),
+        'slug' => $slug,
+        'foto' => $this->input->post('foto')
       );
 
       $this->db->insert('facturas', $data);
@@ -27,11 +25,11 @@ class Facturas_model extends CI_Model {
     public function registrar_producto()
     {
       $data = array(
-        'productos_numero_factura' => $this->input->post('numero_factura'),
-        'productos_marca' => $this->input->post('marca'),
-        'productos_nombre' => $this->input->post('nombre'),
-        'productos_precio' => $this->input->post('precio'),
-        'productos_cantidad' => $this->input->post('cantidad')
+        'numero_factura' => $this->input->post('numero_factura'),
+        'marca' => $this->input->post('marca'),
+        'nombre' => $this->input->post('nombre'),
+        'precio' => $this->input->post('precio'),
+        'cantidad' => $this->input->post('cantidad')
       );
 
       $this->db->insert('productos', $data);
@@ -44,5 +42,21 @@ class Facturas_model extends CI_Model {
       {
         return 0;
       }
+    }
+
+    public function obtener_facturas($numero = NULL)
+    {
+      if ($numero === NULL)
+      {
+        //$this->db->from($this->facturas);
+        //$this->db->order_by("fecha");
+        //ORDENAR POR FECHA
+        $query = $this->db->get('facturas');
+
+        return $query->result_array();
+      }
+
+      $query = $this->db->get_where('facturas', array('numero' => $numero));
+      return $query->row_array();
     }
 }

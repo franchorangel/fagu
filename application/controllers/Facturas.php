@@ -11,10 +11,17 @@ class Facturas extends CI_Controller {
 
 	public function index()
 	{
+		if ( ! $this->ion_auth->logged_in() )
+		{
+			redirect('auth/login');
+		}
+
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->helper('url');
 
+
+		$user = $this->ion_auth->user()->row();
+		$data['user_name'] = $user->username;
 		$data['title'] = 'Factura Nueva';
 
 		$form_validation_rules = array(
@@ -66,7 +73,9 @@ class Facturas extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->library('session');
-		$this->load->helper('url');
+
+		$user = $this->ion_auth->user()->row();
+		$data['user_name'] = $user->username;
 
 		if ( $numero_factura === NULL )
 		{
@@ -138,10 +147,14 @@ class Facturas extends CI_Controller {
 
 	public function elegir_factura()
 	{
-		//obtener ultimas facturas
+		$data['title'] = 'Elige la factura';
+		$user = $this->ion_auth->user()->row();
+		$data['user_name'] = $user->username;
 
-		$this->load->view('templates/header');
-		$this->load->view('elegir_factura');
+		$data['facturas'] = $this->facturas_model->obtener_facturas();
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('elegir_factura', $data);
 		$this->load->view('templates/footer');
 	}
 }
