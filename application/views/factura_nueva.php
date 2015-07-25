@@ -17,4 +17,4 @@
 
 </form>
 
-<a href=""><button>Agregar productos a factura existente</button></a>
+<a href="<?php echo site_url('facturas/elegir_factura') ?>"><button>Agregar productos a factura existente</button></a>

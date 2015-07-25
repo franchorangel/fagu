@@ -1,4 +1,4 @@
-<h1>Registrar Producto</h1>
+<h1>Registrar Producto o Servicio</h1>
 
 <?php echo validation_errors(); ?>
 
@@ -23,3 +23,5 @@
   <input type="submit" name="submit" value="Registrar" />
 
 </form>
+
+<a href="<?php echo site_url('facturas') ?>"><button>Cancelar</button></a>

@@ -13,6 +13,7 @@ class Facturas extends CI_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->helper('url');
 
 		$data['title'] = 'Factura Nueva';
 
@@ -55,8 +56,8 @@ class Facturas extends CI_Controller {
 		}
 		else
 		{
-			$data['numero_factura'] = $this->facturas_model->registrar_factura();
-			$this->load->view('productos_factura', $data);
+			$numero_factura = $this->facturas_model->registrar_factura();
+			redirect(site_url('facturas/agregar_producto/'.$numero_factura));
 		}
 	}
 
@@ -69,7 +70,13 @@ class Facturas extends CI_Controller {
 
 		if ( $numero_factura === NULL )
 		{
-			$data['numero_factura'] = $this->session->flashdata('numero_factura');
+			// if ( $this->session->flashdata('numero_factura') !== NULL )
+			// {
+				$data['numero_factura'] = $this->session->flashdata('numero_factura');
+			// }
+			// else {
+			// 	redirect('/');
+			// }
 		}
 		else
 		{
@@ -77,15 +84,6 @@ class Facturas extends CI_Controller {
 		}
 
 		$form_validation_rules = array(
-			array(
-				'field' => 'marca',
-				'label' => 'marca',
-				'rules' => 'required|max_length[50]|trim',
-				'errors' => array(
-					'required' => 'Se te orvido la %s costilla',
-					'max_length' => 'El nombre de la marca tiene que ser mas corto',
-				),
-			),
 			array(
 				'field' => 'nombre',
 				'label' => 'nombre',
@@ -133,9 +131,17 @@ class Facturas extends CI_Controller {
 			}
 			else
 			{
-				// $this->load->view('factura_nueva');
-				redirect('/index');
+				redirect('/');
 			}
 		}
+	}
+
+	public function elegir_factura()
+	{
+		//obtener ultimas facturas
+
+		$this->load->view('templates/header');
+		$this->load->view('elegir_factura');
+		$this->load->view('templates/footer');
 	}
 }
