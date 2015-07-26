@@ -4,17 +4,17 @@
 
 <?php echo form_open('factura_nueva') ?>
 
-  <label for="numero">Número</label>
-  <input type="input" name="numero" value="<?php echo set_value('numero') ?>"><br />
+  <label class="sr-only" for="numero">Número</label>
+  <input class="form-control" type="input" name="numero" value="<?php echo set_value('numero') ?>" placeholder="Número"><br />
 
-  <label for="fecha">Fecha</label>
-  <input type="input" name="fecha" value="<?php echo set_value('fecha') ?>"><br />
+  <label class="sr-only" for="fecha">Fecha</label>
+  <input class="form-control" type="input" name="fecha" value="<?php echo set_value('fecha') ?>" placeholder="Fecha"><br />
 
-  <label for="establecimiento">Establecimiento</label>
-  <input type="input" name="establecimiento" value="<?php echo set_value('establecimiento') ?>"><br />
+  <label class="sr-only" for="establecimiento">Establecimiento</label>
+  <input class="form-control" type="input" name="establecimiento" value="<?php echo set_value('establecimiento') ?>" placeholder="Establecimiento"><br />
 
-  <input type="submit" name="submit" value="Registrar" />
+  <input class="btn btn-default" type="submit" name="submit" value="Registrar" />
 
 </form>
 
-<a href="<?php echo site_url('facturas/elegir_factura') ?>"><button>Agregar productos a factura existente</button></a>
+<a href="<?php echo site_url('facturas/elegir_factura') ?>"><button class="btn btn-default">Agregar productos a factura existente</button></a>

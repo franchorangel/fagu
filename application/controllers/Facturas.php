@@ -7,18 +7,18 @@ class Facturas extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('facturas_model');
-	}
 
-	public function index()
-	{
 		if ( ! $this->ion_auth->logged_in() )
 		{
 			redirect('auth/login');
 		}
+	}
+
+	public function index()
+	{
 
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-
 
 		$user = $this->ion_auth->user()->row();
 		$data['user_name'] = $user->username;
@@ -157,4 +157,17 @@ class Facturas extends CI_Controller {
 		$this->load->view('elegir_factura', $data);
 		$this->load->view('templates/footer');
 	}
+
+	// public function crear()
+	// {
+	// 	$username = 'Marco';
+	// 	$password = 'hmo42018';
+	// 	$email = 'marcorangel65@gmail.com';
+	// 	$additional_data = array(
+	// 							'first_name' => 'Marco',
+	// 							'last_name' => 'Rangel',
+	// 							);
+	//
+	// 	$this->ion_auth->register($username, $password, $email, $additional_data);
+	// }
 }

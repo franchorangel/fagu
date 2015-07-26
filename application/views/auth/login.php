@@ -3,8 +3,8 @@
 
 <div id="infoMessage"><?php echo $message;?></div>
 
-<?php echo form_open("auth/login", array( 'class' => 'form-signin'));?>
-
+<?php echo form_open("auth/login", array( 'role' => 'form' ));?>
+<div class="form-group">
   <p>
     <?php echo lang('login_identity_label', 'identity', 'class="sr-only"');?>
     <?php echo form_input($identity);?>
@@ -16,13 +16,15 @@
   </p>
 
   <div class="checkbox">
-    <?php echo form_checkbox('remember', '1', FALSE, 'id="remember" class="checkbox"');?>
-    <?php echo lang('login_remember_label', 'remember', 'class="checkbox"');?>
+    <label>
+      <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
+      <?php echo lang('login_remember_label');?>
+    </label>
   </div>
 
+  <p><?php echo form_submit('submit', lang('login_submit_btn'), 'class="btn btn-default"');?></p>
 
-  <p><?php echo form_submit('submit', lang('login_submit_btn'));?></p>
-
+</div>
 <?php echo form_close();?>
 
 <p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>

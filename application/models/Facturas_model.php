@@ -48,9 +48,9 @@ class Facturas_model extends CI_Model {
     {
       if ($numero === NULL)
       {
-        //$this->db->from($this->facturas);
-        //$this->db->order_by("fecha");
-        //ORDENAR POR FECHA
+
+        $this->db->order_by('fecha', 'desc');
+        $this->db->limit(10);
         $query = $this->db->get('facturas');
 
         return $query->result_array();
