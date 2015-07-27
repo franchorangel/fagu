@@ -12,4 +12,3 @@
     </tbody>
   </table>
 </div>
-<a href="<?php echo site_url('facturas') ?>"><button class="btn btn-default">Cancelar</button></a>

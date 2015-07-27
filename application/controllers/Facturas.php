@@ -58,6 +58,7 @@ class Facturas extends CI_Controller {
 		if ( $this->form_validation->run() === FALSE )
 		{
 			$this->load->view('templates/header', $data);
+			$this->load->view('templates/menu', $data);
 			$this->load->view('factura_nueva');
 			$this->load->view('templates/footer');
 		}
@@ -155,6 +156,23 @@ class Facturas extends CI_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('elegir_factura', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function detalles($numero = NULL)
+	{
+		if ( $numero === NULL ) {
+			redirect('facturas/elegir_factura');
+		}
+
+		$data['title'] = 'Factura'.$numero;
+		$user = $this->ion_auth->user()->row();
+		$data['user_name'] = $user->username;
+
+		$data['factura'] = $this->facturas_model->obtener_facturas($numero);
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('detalles_factura', $data);
 		$this->load->view('templates/footer');
 	}
 
