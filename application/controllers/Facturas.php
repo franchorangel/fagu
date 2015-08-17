@@ -25,8 +25,8 @@ class Facturas extends CI_Controller {
 
 		$form_validation_rules = array(
 			array(
-				'field' => 'numero',
-				'label' => 'numero',
+				'field' => 'numero_factura',
+				'label' => 'numero_factura',
 				'rules' => 'required|max_length[8]|trim',
 				'errors' => array(
 					'required' => 'Se te orvido el %s costilla',

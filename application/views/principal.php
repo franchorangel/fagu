@@ -6,7 +6,7 @@
 <?php echo form_open('factura_nueva', 'class="form-inline"') ?>
 
   <label class="sr-only" for="numero_factura">Número</label>
-  <input class="form-control" type="input" name="numero_factura" value="<?php echo set_value('numero') ?>" placeholder="Número">
+  <input class="form-control" type="input" name="numero_factura" value="<?php echo set_value('numero_factura') ?>" placeholder="Número">
 
   <label class="sr-only" for="fecha">Fecha</label>
   <input class="form-control" type="input" name="fecha" value="<?php echo set_value('fecha') ?>" placeholder="Fecha">

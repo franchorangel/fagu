@@ -9,14 +9,14 @@ class Facturas_model extends CI_Model {
     public function registrar_factura()
     {
       $data = array(
-        'numero_factura' => $this->input->post('numero_factura'),
+        'numero' => $this->input->post('numero_factura'),
         'fecha' => $this->input->post('fecha'),
         'establecimiento' => $this->input->post('establecimiento'),
         'foto' => $this->input->post('foto')
       );
 
       $this->db->insert('facturas', $data);
-      return $this->input->post('numero');
+      return $this->input->post('numero_factura');
     }
 
     public function registrar_producto()
