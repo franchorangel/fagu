@@ -14,15 +14,14 @@ class Facturas extends CI_Controller {
 		}
 	}
 
-	public function index()
-	{
-
+	public function index(){
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
 		$user = $this->ion_auth->user()->row();
 		$data['user_name'] = $user->username;
-		$data['title'] = 'Factura Nueva';
+		$data['title'] = 'Principal';
+		$data['facturas'] = $this->facturas_model->obtener_facturas();
 
 		$form_validation_rules = array(
 			array(
@@ -59,39 +58,25 @@ class Facturas extends CI_Controller {
 		{
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/menu', $data);
-			$this->load->view('factura_nueva');
+			$this->load->view('principal', $data);
 			$this->load->view('templates/footer');
 		}
 		else
 		{
 			$numero_factura = $this->facturas_model->registrar_factura();
-			redirect(site_url('facturas/agregar_producto/'.$numero_factura));
+			redirect(site_url('facturas/detalles/'.$numero_factura));
 		}
 	}
 
-	public function agregar_producto($numero_factura = NULL)
+	public function detalles($numero_factura = NULL)
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->library('session');
 
 		$user = $this->ion_auth->user()->row();
 		$data['user_name'] = $user->username;
-
-		if ( $numero_factura === NULL )
-		{
-			// if ( $this->session->flashdata('numero_factura') !== NULL )
-			// {
-				$data['numero_factura'] = $this->session->flashdata('numero_factura');
-			// }
-			// else {
-			// 	redirect('/');
-			// }
-		}
-		else
-		{
-			$data['numero_factura'] = $numero_factura;
-		}
+		$data['numero_factura'] = $numero_factura;
+		$data['productos'] = $this->facturas_model->obtener_productos($numero_factura);
 
 		$form_validation_rules = array(
 			array(
@@ -124,56 +109,18 @@ class Facturas extends CI_Controller {
 		);
 		$this->form_validation->set_rules($form_validation_rules);
 
-		$data['title'] = 'Agregar Producto';
+		$data['title'] = 'Detalles de Factura';
 		if ( $this->form_validation->run() === FALSE )
 		{
 			$this->load->view('templates/header', $data);
-			$this->load->view('agregar_producto', $data);
+			$this->load->view('facturas/detalles', $data);
 			$this->load->view('templates/footer');
 		}
 		else
 		{
-			$data['numero_factura'] = $this->facturas_model->registrar_producto($numero_factura);
-			if ( ! $data['numero_factura'] == 0 )
-			{
-				$this->session->set_flashdata('numero_factura', $data['numero_factura']);
-				redirect(current_url());
-			}
-			else
-			{
-				redirect('/');
-			}
+				$numero_factura = $this->facturas_model->registrar_producto($numero_factura);
+				redirect(site_url('facturas/detalles/'.$numero_factura));
 		}
-	}
-
-	public function elegir_factura()
-	{
-		$data['title'] = 'Elige la factura';
-		$user = $this->ion_auth->user()->row();
-		$data['user_name'] = $user->username;
-
-		$data['facturas'] = $this->facturas_model->obtener_facturas();
-
-		$this->load->view('templates/header', $data);
-		$this->load->view('elegir_factura', $data);
-		$this->load->view('templates/footer');
-	}
-
-	public function detalles($numero = NULL)
-	{
-		if ( $numero === NULL ) {
-			redirect('facturas/elegir_factura');
-		}
-
-		$data['title'] = 'Factura'.$numero;
-		$user = $this->ion_auth->user()->row();
-		$data['user_name'] = $user->username;
-
-		$data['factura'] = $this->facturas_model->obtener_facturas($numero);
-
-		$this->load->view('templates/header', $data);
-		$this->load->view('detalles_factura', $data);
-		$this->load->view('templates/footer');
 	}
 
 	// public function crear()

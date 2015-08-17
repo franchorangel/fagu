@@ -8,13 +8,10 @@ class Facturas_model extends CI_Model {
 
     public function registrar_factura()
     {
-      $slug = url_title($this->input->post('numero'), 'dash', TRUE);
-
       $data = array(
-        'numero' => $this->input->post('numero'),
+        'numero_factura' => $this->input->post('numero_factura'),
         'fecha' => $this->input->post('fecha'),
         'establecimiento' => $this->input->post('establecimiento'),
-        'slug' => $slug,
         'foto' => $this->input->post('foto')
       );
 
@@ -33,15 +30,7 @@ class Facturas_model extends CI_Model {
       );
 
       $this->db->insert('productos', $data);
-      $checked = $this->input->post('otro');
-      if ( (int)$checked == 1 )
-      {
-        return $this->input->post('numero_factura');
-      }
-      else
-      {
-        return 0;
-      }
+      return $this->input->post('numero_factura');
     }
 
     public function obtener_facturas($numero = NULL)
@@ -49,7 +38,7 @@ class Facturas_model extends CI_Model {
       if ($numero === NULL)
       {
 
-        $this->db->order_by('fecha', 'desc');
+        $this->db->order_by('fecha_de_registro_en_sistema', 'desc');
         $this->db->limit(10);
         $query = $this->db->get('facturas');
 
@@ -58,5 +47,17 @@ class Facturas_model extends CI_Model {
 
       $query = $this->db->get_where('facturas', array('numero' => $numero));
       return $query->row_array();
+    }
+
+    public function obtener_productos($numero = NULL){
+      if($numero === NULL){
+        return false;
+      }
+      else
+      {
+        $this->db->order_by('fecha_de_registro_en_sistema', 'desc');
+        $query = $this->db->get_where('productos', array('numero_factura' => $numero));
+        return $query->result_array();
+      }
     }
 }

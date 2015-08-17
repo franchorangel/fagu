@@ -10,4 +10,4 @@
     <div id="logo"></div>
   </header>
   <div class="container col-md-12 col-centered">
-    <div id="login-wrapper" class="col-xs-8 col-xs-offset-2 col-sm-5 col-sm-offset-3 col-md-4 col-md-offset-4">
+    <div id="login-wrapper" class="col-xs-12 col-sm-5 col-sm-offset-3 col-md-4 col-md-offset-4">
