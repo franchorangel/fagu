@@ -32,6 +32,8 @@
       <th>Cantidad</th>
     </thead>
     <tbody>
+
+<?php if( sizeof($productos) > 0 ): ?>
   <?php foreach ($productos as $producto): ?>
     <tr>
       <td><?php echo $producto['nombre'] ?></td>
@@ -39,10 +41,14 @@
       <td><?php echo $producto['cantidad'] ?></td>
       <td>
         <a href="<?php //Ir a pantalla de edicion de producto['id'] ?>"><button class="btn btn-sm btn-warning">Cambiar</button></a>
-        <a href="<?php //Eliminar producto con producto['id'] ?>"><button class="btn btn-sm btn-danger">Borrar</button></a>
+        <a href="<?php echo site_url('facturas/eliminar_producto/'.$producto['id'].'/'.$numero_factura); ?>"><button class="btn btn-sm btn-danger">Borrar</button></a>
       </td>
     </tr>
   <?php endforeach ?>
+<?php else: ?>
+  <tr><td>Esta factura todavía no tiene productos</td></tr>
+<?php endif; ?>
+
     </tbody>
   </table>
 </div>

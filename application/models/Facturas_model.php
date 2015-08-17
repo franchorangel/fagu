@@ -49,7 +49,8 @@ class Facturas_model extends CI_Model {
       return $query->row_array();
     }
 
-    public function obtener_productos($numero = NULL){
+    public function obtener_productos($numero = NULL)
+    {
       if($numero === NULL){
         return false;
       }
@@ -59,5 +60,10 @@ class Facturas_model extends CI_Model {
         $query = $this->db->get_where('productos', array('numero_factura' => $numero));
         return $query->result_array();
       }
+    }
+
+    public function eliminar_producto($id)
+    {
+      $query = $this->db->delete('productos', array('id' => $id));
     }
 }

@@ -68,7 +68,7 @@ class Facturas extends CI_Controller {
 		}
 	}
 
-	public function detalles($numero_factura = NULL)
+	public function detalles($numero_factura)
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -76,6 +76,8 @@ class Facturas extends CI_Controller {
 		$user = $this->ion_auth->user()->row();
 		$data['user_name'] = $user->username;
 		$data['numero_factura'] = $numero_factura;
+
+		//Fix: Cuando falla la validacion se pierde el $numero_factura
 		$data['productos'] = $this->facturas_model->obtener_productos($numero_factura);
 
 		$form_validation_rules = array(
@@ -118,9 +120,15 @@ class Facturas extends CI_Controller {
 		}
 		else
 		{
-				$numero_factura = $this->facturas_model->registrar_producto($numero_factura);
-				redirect(site_url('facturas/detalles/'.$numero_factura));
+			$numero_factura = $this->facturas_model->registrar_producto($numero_factura);
+			redirect(site_url('facturas/detalles/'.$numero_factura));
 		}
+	}
+
+	public function eliminar_producto($id, $numero_factura)
+	{
+		$this->facturas_model->eliminar_producto($id);
+		redirect('facturas/detalles/'.$numero_factura);
 	}
 
 	// public function crear()
