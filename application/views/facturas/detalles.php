@@ -4,7 +4,7 @@
 
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('facturas/detalles', 'class="form-inline"') ?>
+<?php echo form_open('facturas/detalles/'.$numero_factura, 'class="form-inline"') ?>
   <label for="numero_factura" class="sr-only">Nro Factura:</label>
   <input class="sr-only" type="input" name="numero_factura" value="<?php echo set_value('numero_factura', $numero_factura) ?>" readonly>
 
