@@ -20,8 +20,8 @@ class Comidas extends CI_Controller {
     }
     else
     {
-      $numero_factura = $this->facturas_model->registrar_factura();
-      redirect(site_url('facturas/detalles/'.$numero_factura));
+      $dia = $this->comidas_model->registrar_comida();
+      redirect(site_url('comidas'.$dia));
     }
   }
 

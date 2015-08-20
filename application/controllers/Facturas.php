@@ -57,7 +57,7 @@ class Facturas extends CI_Controller {
 		if ( $this->form_validation->run() === FALSE )
 		{
 			$this->load->view('templates/header', $data);
-			$this->load->view('principal', $data);
+			$this->load->view('facturas/principal', $data);
 			$this->load->view('templates/footer');
 		}
 		else
