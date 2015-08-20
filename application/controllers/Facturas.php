@@ -57,7 +57,6 @@ class Facturas extends CI_Controller {
 		if ( $this->form_validation->run() === FALSE )
 		{
 			$this->load->view('templates/header', $data);
-			$this->load->view('templates/menu', $data);
 			$this->load->view('principal', $data);
 			$this->load->view('templates/footer');
 		}
@@ -129,16 +128,4 @@ class Facturas extends CI_Controller {
 		redirect(site_url('facturas/detalles/'.$numero_factura));
 	}
 
-	// public function crear()
-	// {
-	// 	$username = 'Marco';
-	// 	$password = 'hmo42018';
-	// 	$email = 'marcorangel65@gmail.com';
-	// 	$additional_data = array(
-	// 							'first_name' => 'Marco',
-	// 							'last_name' => 'Rangel',
-	// 							);
-	//
-	// 	$this->ion_auth->register($username, $password, $email, $additional_data);
-	// }
 }

@@ -46,7 +46,7 @@
     </tr>
   <?php endforeach ?>
 <?php else: ?>
-  <tr><td>Esta factura todavía no tiene productos</td></tr>
+  <tr><td>Esta factura todavía no tiene productos. Agrega algunos!</td></tr>
 <?php endif; ?>
 
     </tbody>

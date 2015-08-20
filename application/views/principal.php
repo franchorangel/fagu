@@ -3,7 +3,7 @@
 <h3>Registrar</h3>
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('factura_nueva', 'class="form-inline"') ?>
+<?php echo form_open('index', 'class="form-inline"') ?>
 
   <label class="sr-only" for="numero_factura">Número</label>
   <input class="form-control" type="input" name="numero_factura" value="<?php echo set_value('numero_factura') ?>" placeholder="Número">
