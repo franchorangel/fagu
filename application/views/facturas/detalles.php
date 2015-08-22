@@ -1,6 +1,7 @@
 <a href="<?php echo site_url('facturas') ?>"><button class="btn btn-default">Regresar</button></a>
 
 <h1>Detalles de Factura #<?php echo $numero_factura ?></h1> <!--Agregar establecimiento-->
+<h2> Total: Bs. <?php echo $total ?></h2>
 
 <?php echo validation_errors(); ?>
 
@@ -37,7 +38,18 @@
   <?php foreach ($productos as $producto): ?>
     <tr>
       <td><?php echo $producto['nombre'] ?></td>
-      <td><?php echo $producto['precio'] ?></td>
+      <td>
+        <?php
+          if ( $producto['tiene_iva'] )
+          {
+            echo ( $producto['precio'] + ( $producto['precio'] * 0.12 ) ); //Pasar esto al modelo
+          }
+          else
+          {
+            echo $producto['precio'];
+          }
+        ?>
+      </td>
       <td><?php echo $producto['cantidad'] ?></td>
       <td>
         <a href="<?php //Ir a pantalla de edicion de producto['id'] ?>"><button class="btn btn-sm btn-warning">Cambiar</button></a>

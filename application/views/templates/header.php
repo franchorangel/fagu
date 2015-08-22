@@ -25,7 +25,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li><a href="<?php echo site_url('facturas') ?>">Facturas</a></li>
-            <li><a href="<?php echo site_url('comidas') ?>">Comidas</a></li>
+            <li><a href="<?php echo site_url('deudas') ?>">Deudas</a></li>
+            <li><a href="<?php echo site_url('comidas') ?>">Comidas</a></li>  
           </ul>
           <ul class="nav navbar-nav navbar-right">
 

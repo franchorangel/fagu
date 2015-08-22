@@ -22,6 +22,7 @@ class Facturas extends CI_Controller {
 		$data['user_name'] = $user->username;
 		$data['title'] = 'Principal';
 		$data['facturas'] = $this->facturas_model->obtener_facturas();
+		$data['total'] = $this->facturas_model->obtener_total_factura();
 
 		$form_validation_rules = array(
 			array(
@@ -62,7 +63,7 @@ class Facturas extends CI_Controller {
 		}
 		else
 		{
-			$numero_factura = $this->facturas_model->registrar_factura();
+			$numero_factura = $this->facturas_model->registrar_factura( $user->user_id );
 
 			if ( $numero_factura === 'Fecha inválida')
 			{
@@ -84,7 +85,8 @@ class Facturas extends CI_Controller {
 		$user = $this->ion_auth->user()->row();
 		$data['user_name'] = $user->username;
 		$data['numero_factura'] = $numero_factura;
-		$data['productos'] = $this->facturas_model->obtener_productos($numero_factura);
+		$data['productos'] = $this->facturas_model->obtener_facturas($numero_factura);
+		$data['total'] = $this->facturas_model->obtener_total_factura($numero_factura);
 
 		$form_validation_rules = array(
 			array(

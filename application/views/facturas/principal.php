@@ -119,6 +119,7 @@
         <th># Factura</th>
         <th>Fecha</th>
         <th>Establecimiento</th>
+        <th>Total Bs.</th>
         <th></th>
       </thead>
       <?php foreach ($facturas as $factura): ?>
@@ -126,6 +127,7 @@
           <td><?php echo $factura['numero'] ?></td>
           <td><?php echo strftime('%d %b %y', strtotime($factura['fecha'])); ?></td>
           <td><?php echo $factura['establecimiento'] ?></td>
+          <td><?php echo $total[$factura['numero']]; ?></td>
           <td><a href="<?php echo site_url('facturas/detalles').'/'.$factura['numero'] ?>"><button class="btn btn-sm btn-default btn-warning">Ver / Editar</button></a></td>
         </tr>
       <?php endforeach ?>
