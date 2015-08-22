@@ -63,6 +63,15 @@ class Facturas extends CI_Controller {
 		else
 		{
 			$numero_factura = $this->facturas_model->registrar_factura();
+
+			if ( $numero_factura === 'Fecha inválida')
+			{
+				$data['error'] = $numero_factura;
+				$this->load->view('templates/header', $data);
+				$this->load->view('facturas/principal', $data);
+				$this->load->view('templates/footer');
+			}
+
 			redirect(site_url('facturas/detalles/'.$numero_factura));
 		}
 	}

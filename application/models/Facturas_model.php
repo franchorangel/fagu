@@ -8,9 +8,16 @@ class Facturas_model extends CI_Model {
 
     public function registrar_factura()
     {
+      $fecha = DateTime::createFromFormat('d/m/Y', $this->input->post('fecha'));
+      if ( $fecha === false )
+      {
+        return 'Fecha inválida';
+      }
+      $fecha = $fecha->format('Y-m-d');
+
       $data = array(
         'numero' => $this->input->post('numero_factura'),
-        'fecha' => $this->input->post('fecha'),
+        'fecha' => $fecha,
         'establecimiento' => $this->input->post('establecimiento'),
         'foto' => $this->input->post('foto')
       );
