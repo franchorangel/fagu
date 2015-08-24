@@ -21,6 +21,10 @@
   <label for="cantidad" class="sr-only">Cantidad</label>
   <input class="form-control" type="input" name="cantidad" value="<?php echo set_value('cantidad') ?>" placeholder="Cantidad">
 
+  <div class="checkbox-inline">
+    <label for="exento de iva"><input type="checkbox" value="" name="tiene_iva">Exento de IVA</label>
+  </div>
+
   <input class="btn btn-default btn-primary" type="submit" name="submit" value="Agregar" />
 
 </form>
@@ -42,11 +46,11 @@
         <?php
           if ( $producto['tiene_iva'] )
           {
-            echo ( $producto['precio'] + ( $producto['precio'] * 0.12 ) ); //Pasar esto al modelo
+            echo number_format((float)( $producto['precio'] + ( $producto['precio'] * 0.12 ) ), 2, ',', ''); //Pasar esto al modelo
           }
           else
           {
-            echo $producto['precio'];
+            echo number_format((float)$producto['precio'], 2, ',', '');
           }
         ?>
       </td>

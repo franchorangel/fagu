@@ -24,11 +24,16 @@ class Facturas_model extends CI_Model {
       }
       $fecha = $fecha->format('Y-m-d');
 
+      $establecimiento = $this->input->post('establecimiento');
+      $establecimiento = trim($establecimiento);
+      $establecimiento = strtolower($establecimiento);
+      $establecimiento = ucwords($establecimiento);
+
       $data = array(
         'numero' => $this->input->post('numero_factura'),
         'fecha' => $fecha,
         'registrador' => $user_id,
-        'establecimiento' => $this->input->post('establecimiento'),
+        'establecimiento' => $establecimiento,
         'foto' => $this->input->post('foto')
       );
 
@@ -38,11 +43,28 @@ class Facturas_model extends CI_Model {
 
     public function registrar_producto()
     {
+      $marca = $this->input->post('marca');
+      $marca = trim($marca);
+      $marca = strtolower($marca);
+      $marca = ucwords($marca);
+
+      $nombre = $this->input->post('nombre');
+      $nombre = trim($nombre);
+      $nombre = strtolower($nombre);
+      $nombre = ucwords($nombre);
+
+      $tiene_iva = $this->input->post('tiene_iva');
+      if ( !isset($tiene_iva) == 1 )
+        $tiene_iva = 1;
+      else
+        $tiene_iva = 0;
+
       $data = array(
         'numero_factura' => $this->input->post('numero_factura'),
-        'marca' => $this->input->post('marca'),
-        'nombre' => $this->input->post('nombre'),
+        'marca' => $marca,
+        'nombre' => $nombre,
         'precio' => $this->input->post('precio'),
+        'tiene_iva'=> $tiene_iva,
         'cantidad' => $this->input->post('cantidad')
       );
 
