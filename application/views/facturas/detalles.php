@@ -1,7 +1,7 @@
 <a href="<?php echo site_url('facturas') ?>"><button class="btn btn-default">Regresar</button></a>
 
 <h1>Detalles de Factura #<?php echo $numero_factura ?></h1> <!--Agregar establecimiento-->
-<h2> Total: Bs. <?php echo $total ?></h2>
+<h2> Total: Bs. <?php echo number_format((float)$total, 2, ',', ''); ?></h2>
 
 <?php echo validation_errors(); ?>
 

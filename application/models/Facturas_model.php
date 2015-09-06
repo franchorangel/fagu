@@ -6,6 +6,10 @@ class Facturas_model extends CI_Model {
       $this->load->database();
     }
 
+    public function conteo_facturas() {
+        return $this->db->count_all("facturas");
+    }
+
     public function registrar_factura( $user_id = NULL )
     {
       if ( $user_id === NULL )
@@ -72,13 +76,13 @@ class Facturas_model extends CI_Model {
       return $this->input->post('numero_factura');
     }
 
-    public function obtener_facturas( $numero_factura = NULL )
+    public function obtener_facturas( $numero_factura = NULL, $limit = 10, $start = 0 )
     {
       if ($numero_factura === NULL)
       {
+        $this->db->limit($limit, $start);
         $this->db->order_by('fecha_de_registro_en_sistema', 'desc');
         $this->db->select('numero, fecha, establecimiento');
-        $this->db->limit(10);
         $query = $this->db->get('facturas');
 
         return $query->result_array();
@@ -96,15 +100,15 @@ class Facturas_model extends CI_Model {
       $query = $this->db->delete('productos', array('id' => $id));
     }
 
-    public function obtener_total_factura( $numero_factura = NULL )
+    public function obtener_total_factura( $numero_factura = NULL, $limit = 10, $start = 0 )
     {
       $iva = 0.12;
 
       if ( $numero_factura === NULL )
       {
+        $this->db->limit($limit, $start);
         $this->db->order_by('fecha_de_registro_en_sistema', 'desc');
         $this->db->select('numero');
-        $this->db->limit(10);
         $query = $this->db->get('facturas');
         $facturas = $query->result_array();
 

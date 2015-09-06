@@ -108,8 +108,8 @@
 </form>
 
 <div class="row">
-  <h3 class="col-md-3">Últimas Registradas</h3>
-  <a href="#" class="col-md-1" style="margin-top:25px; margin-left:-55px;">Ver todas</a>
+  <h3 class="col-md-4 col-xs-8 col-lg-3">Últimas Registradas</h3>
+  <a href="<?php echo site_url('facturas/todas') ?>" class="col-md-2 col-xs-3 col-lg-2" style="margin-top:25px;">Ver todas</a>
 </div>
 
 <div class="table-responsive">

@@ -133,6 +133,30 @@ class Facturas extends CI_Controller {
 		}
 	}
 
+	public function todas()
+	{
+		$this->load->library('pagination');
+
+		$user = $this->ion_auth->user()->row();
+		$data['user_name'] = $user->username;
+
+		$config = array();
+		$config['base_url'] = site_url('facturas/todas');
+		$config['total_rows'] = $this->facturas_model->conteo_facturas();
+		$config['per_page'] = 10;
+
+		$this->pagination->initialize($config);
+
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		$data['facturas'] = $this->facturas_model->obtener_facturas(NULL, $config['per_page'], $page);
+		$data['total'] = $this->facturas_model->obtener_total_factura(NULL, $config['per_page'], $page);
+		$data['links'] = $this->pagination->create_links();
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('facturas/todas', $data);
+		$this->load->view('templates/footer');
+	}
+
 	public function eliminar_producto($id, $numero_factura)
 	{
 		$this->facturas_model->eliminar_producto($id);
